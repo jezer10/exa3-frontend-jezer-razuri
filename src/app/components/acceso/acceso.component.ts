@@ -1,5 +1,7 @@
 import { ThrowStmt } from '@angular/compiler';
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/login/auth.service';
 
 @Component({
@@ -8,22 +10,23 @@ import { AuthService } from 'src/app/services/login/auth.service';
   styleUrls: ['./acceso.component.css']
 })
 export class AccesoComponent implements OnInit {
-  accesos:any[];
-  constructor(private authService:AuthService) { }
+  accesos: any[];
+  constructor(private authService: AuthService,private route:Router) { }
 
   ngOnInit(): void {
-    let usuario=JSON.parse(sessionStorage.usuario);
-    this.accesos=usuario.accesos;
-    console.log(this.accesos)
+
   }
-  autenticado():boolean{
-    let usuario=JSON.parse(sessionStorage.usuario);
-    this.accesos=usuario.accesos;
-    return this.authService.isAuthenticated();
-    
+  autenticado(): boolean {
+    if (this.authService.isAuthenticated()) {
+      let usuario = JSON.parse(sessionStorage.usuario);
+      this.accesos = usuario.accesos;
+      return true
+    }
+
   }
-  cerrarSesion():void{
+  cerrarSesion(): void {
     this.authService.logout();
+    this.route.navigate(['/login'])
   }
 
 }

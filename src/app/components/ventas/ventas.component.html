@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8" style="padding: 20px;">
+            <div class="card" style="margin: 10px;">
+                <div class="card-body">
+                PRODUCTO: <select class="form-select" (change)="addProductoToList($event.target.value)">
+                        <option *ngFor="let e of productos" [value]="e.IDPRODUCTO">{{e.NOMPROD}}</option>
+                      </select>
+                </div>
+            </div>
+            <div class="card" style="margin: 10px;">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Importe</th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let e of carrito;let i=index;">
+                            <th scope="row">{{i+1}}</th>
+                            <td><input [value]="e.cantidad" type="number" ></td>
+                            <td>{{e.nomprod}}</td>
+                            <td>{{e.precio}}</td>
+                            <td>{{e.importe}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" style="text-align: end;"><button type="button" class="btn btn-success"><i class="fas fa-shopping-cart"></i> Registrar venta</button></div>
+                <div class="col"><button type="button" class="btn btn-warning"><i class="fas fa-window-close"></i> Cancelar venta</button></div>
+            </div>
+        </div>
+        <div class="col-4" style="height: 100vh;border: 1px solid gainsboro;">
+            <div class="div precio" style="height: 20%;background-color: blue;">
+                S/.{{importeTotal()}}
+            </div>
+            <div class="div" style="height: 60%;padding: 10px;">
+                
+                <div class="row">
+                    <div class="col">
+                        <label for="inputEmail4" class="form-label">Documento</label>
+                        <select class="form-select" >
+                            <option *ngFor="let e of tipoDoc" [value]="e.iddoc">{{e.nombre}}</option>
+                          </select>
+                    </div>
+                    <div class="col">
+                        <label for="inputEmail4" class="form-label">N° de venta</label>
+                        <input type="email" class="form-control" >
+                    </div>
+                </div>    
+                
+                <div class="row">
+                    <div class="col">
+                        <label for="inputEmail4" class="form-label">Fecha de venta</label>
+                        <input type="email" class="form-control"  [value]="formatFecha()" disabled style="text-align: center;">
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col">
+                        <label for="inputEmail4" class="form-label">Cliente</label>
+                        <input type="email" class="form-control" >
+                    </div>
+                </div> 
+                <hr>
+                <div class="row">
+                    <div class="col">SUB TOTAL</div>
+                    <div class="col" style="text-align: end;">S/.{{importeTotal()-importeIGV()}}</div>
+                </div>
+                <div class="row">
+                    <div class="col">IGV (18%)</div>
+                    <div class="col" style="text-align: end;">S/.{{importeIGV()}}</div>
+                </div>
+                <div class="row">
+                    <div class="col">TOTAL</div>
+                    <div class="col" style="text-align: end;">S/.{{importeTotal()}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

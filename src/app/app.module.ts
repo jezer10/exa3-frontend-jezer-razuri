@@ -7,12 +7,22 @@ import { AccesoComponent } from './components/acceso/acceso.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ProductoComponent } from './components/producto/producto.component';
+import { HomeComponent } from './components/home/home.component';
+import { ListarVentasComponent } from './components/listar-ventas/listar-ventas.component';
+import { VentasComponent } from './components/ventas/ventas.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     AccesoComponent,
-    LoginComponent
+    LoginComponent,
+    ProductoComponent,
+    HomeComponent,
+    ListarVentasComponent,
+    VentasComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

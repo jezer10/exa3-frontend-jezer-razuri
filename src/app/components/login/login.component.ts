@@ -15,6 +15,10 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router,private authService:AuthService) { }
   usuario:Usuario=new Usuario();
   ngOnInit(): void {
+    if(this.authService.isAuthenticated()){
+      Swal.fire('Login',`Hola ${this.authService.usuario.username} ya estas autenticado!`,'info');
+      this.router.navigate(['/menu']);
+    }
   }
 
   login():void{
